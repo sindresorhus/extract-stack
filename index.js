@@ -1,14 +1,14 @@
 'use strict';
-const reStack = /(?:\n {4}at .*)+/;
+const stackRegex = /(?:\n {4}at .*)+/;
 
-module.exports = err => {
-	const stack = err instanceof Error ? err.stack : err;
+const extractStack = error => {
+	const stack = error instanceof Error ? error.stack : error;
 
 	if (!stack) {
 		return '';
 	}
 
-	const match = stack.match(reStack);
+	const match = stack.match(stackRegex);
 
 	if (!match) {
 		return '';
@@ -17,4 +17,5 @@ module.exports = err => {
 	return match[0].slice(1);
 };
 
-module.exports.lines = stack => module.exports(stack).replace(/^ {4}at /gm, '').split('\n');
+module.exports = extractStack;
+module.exports.lines = stack => extractStack(stack).replace(/^ {4}at /gm, '').split('\n');

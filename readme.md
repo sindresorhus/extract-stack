@@ -6,7 +6,7 @@
 ## Install
 
 ```
-$ npm install --save extract-stack
+$ npm install extract-stack
 ```
 
 
@@ -49,15 +49,15 @@ console.log(extractStack.lines(error));
 
 It gracefully handles cases where the stack is undefined or empty and returns an empty string.
 
-### extractStack(input)
+### extractStack(error)
 
 Returns the actual stack part of the error stack.
 
-### extractStack.lines(input)
+### extractStack.lines(error)
 
 Returns the stack lines of the error stack without the noise as an `Array`.
 
-#### input
+#### error
 
 Type: `Error` `string`
 
