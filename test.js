@@ -1,5 +1,5 @@
 import test from 'ava';
-import m from '.';
+import extractStack from '.';
 
 test('main', t => {
 	const stack = [
@@ -8,20 +8,20 @@ test('main', t => {
 		'    at Foo (test.js:3:1)'
 	].join('\n');
 
-	t.is(m(stack), '    at Test.t (test.js:1:1)\n    at Foo (test.js:3:1)');
+	t.is(extractStack(stack), '    at Test.t (test.js:1:1)\n    at Foo (test.js:3:1)');
 });
 
 test('Error input', t => {
-	const err = new Error();
+	const error = new Error('foo');
 
 	const stack = [
 		'Error: Message',
 		'    at Test.t (test.js:1:1)'
 	].join('\n');
 
-	err.stack = stack;
+	error.stack = stack;
 
-	t.is(m(err), '    at Test.t (test.js:1:1)');
+	t.is(extractStack(error), '    at Test.t (test.js:1:1)');
 });
 
 test('strip multiline error message', t => {
@@ -33,7 +33,7 @@ test('strip multiline error message', t => {
 		'    at Test.t (test.js:1:1)'
 	].join('\n');
 
-	t.is(m(stack), '    at Test.t (test.js:1:1)');
+	t.is(extractStack(stack), '    at Test.t (test.js:1:1)');
 });
 
 test('includes anonymous function lines', t => {
@@ -42,23 +42,23 @@ test('includes anonymous function lines', t => {
 		'    at path/to/test.js:1:1'
 	].join('\n');
 
-	t.is(m(stack), '    at path/to/test.js:1:1');
+	t.is(extractStack(stack), '    at path/to/test.js:1:1');
 });
 
 test('includes anonymous function lines #2', t => {
 	const getAnonymousFn = () => () => {
-		throw new Error();
+		throw new Error('foo');
 	};
 
-	let retErr;
+	let returnedError;
 
 	try {
 		getAnonymousFn()();
-	} catch (err) {
-		retErr = err;
+	} catch (error) {
+		returnedError = error;
 	}
 
-	t.regex(m.lines(retErr.stack)[0].replace(__filename, ''), /:\d+:\d+/);
+	t.regex(extractStack.lines(returnedError.stack)[0].replace(__filename, ''), /:\d+:\d+/);
 });
 
 test('.lines()', t => {
@@ -68,5 +68,5 @@ test('.lines()', t => {
 		'    at Foo (test.js:3:1)'
 	].join('\n');
 
-	t.deepEqual(m.lines(stack), ['Test.t (test.js:1:1)', 'Foo (test.js:3:1)']);
+	t.deepEqual(extractStack.lines(stack), ['Test.t (test.js:1:1)', 'Foo (test.js:3:1)']);
 });
