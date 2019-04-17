@@ -10,6 +10,7 @@ declare const extractStack: {
 	@example
 	```
 	import extractStack = require('extract-stack');
+
 	const error = new Error('Missing unicorn');
 
 	console.log(error.stack);
@@ -37,6 +38,7 @@ declare const extractStack: {
 	@example
 	```
 	import extractStack = require('extract-stack');
+
 	const error = new Error('Missing unicorn');
 
 	console.log(error.stack);

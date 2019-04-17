@@ -18,4 +18,5 @@ const extractStack = error => {
 };
 
 module.exports = extractStack;
+
 module.exports.lines = stack => extractStack(stack).replace(/^ {4}at /gm, '').split('\n');

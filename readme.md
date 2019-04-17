@@ -14,6 +14,7 @@ $ npm install extract-stack
 
 ```js
 const extractStack = require('extract-stack');
+
 const error = new Error('Missing unicorn');
 
 console.log(error.stack);
@@ -47,7 +48,7 @@ console.log(extractStack.lines(error));
 
 ## API
 
-It gracefully handles cases where the stack is undefined or empty and returns an empty string.
+It gracefully handles cases where the stack is `undefined` or empty and returns an empty string.
 
 ### extractStack(error)
 
@@ -55,11 +56,11 @@ Returns the actual stack part of the error stack.
 
 ### extractStack.lines(error)
 
-Returns the stack lines of the error stack without the noise as an `Array`.
+Returns the stack lines of the error stack without the noise as a `string[]`.
 
 #### error
 
-Type: `Error` `string`
+Type: `Error | string | undefined`
 
 Either an `Error` or the `.stack` of an `Error`.
 
