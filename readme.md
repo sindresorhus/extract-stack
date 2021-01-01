@@ -1,4 +1,4 @@
-# extract-stack [![Build Status](https://travis-ci.org/sindresorhus/extract-stack.svg?branch=master)](https://travis-ci.org/sindresorhus/extract-stack)
+# extract-stack
 
 > Extract the actual stack of an error
 
