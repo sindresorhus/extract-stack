@@ -1,6 +1,6 @@
 {
 	"name": "extract-stack",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Extract the actual stack of an error",
 	"license": "MIT",
 	"repository": "sindresorhus/extract-stack",
