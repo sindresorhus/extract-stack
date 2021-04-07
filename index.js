@@ -1,4 +1,3 @@
-'use strict';
 const stackRegex = /(?:\n {4}at .*)+/;
 
 const extractStack = error => {
@@ -17,6 +16,6 @@ const extractStack = error => {
 	return match[0].slice(1);
 };
 
-module.exports = extractStack;
+extractStack.lines = stack => extractStack(stack).replace(/^ {4}at /gm, '').split('\n');
 
-module.exports.lines = stack => extractStack(stack).replace(/^ {4}at /gm, '').split('\n');
+export default extractStack;

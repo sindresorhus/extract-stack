@@ -1,5 +1,5 @@
 import {expectType} from 'tsd';
-import extractStack = require('.');
+import extractStack from './index.js';
 
 const error = new Error('Missing unicorn');
 

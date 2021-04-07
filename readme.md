@@ -2,18 +2,16 @@
 
 > Extract the actual stack of an error
 
-
 ## Install
 
 ```
 $ npm install extract-stack
 ```
 
-
 ## Usage
 
 ```js
-const extractStack = require('extract-stack');
+import extractStack from 'extract-stack';
 
 const error = new Error('Missing unicorn');
 
@@ -45,7 +43,6 @@ console.log(extractStack.lines(error));
 */
 ```
 
-
 ## API
 
 It gracefully handles cases where the stack is `undefined` or empty and returns an empty string.
@@ -64,12 +61,6 @@ Type: `Error | string | undefined`
 
 Either an `Error` or the `.stack` of an `Error`.
 
-
 ## Related
 
 - [clean-stack](https://github.com/sindresorhus/clean-stack) - Clean up error stack traces
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)

@@ -1,5 +1,6 @@
+import {fileURLToPath} from 'url';
 import test from 'ava';
-import extractStack from '.';
+import extractStack from './index.js';
 
 test('main', t => {
 	const stack = [
@@ -58,7 +59,7 @@ test('includes anonymous function lines #2', t => {
 		returnedError = error;
 	}
 
-	t.regex(extractStack.lines(returnedError.stack)[0].replace(__filename, ''), /:\d+:\d+/);
+	t.regex(extractStack.lines(returnedError.stack)[0].replace(fileURLToPath(import.meta.url), ''), /:\d+:\d+/);
 });
 
 test('.lines()', t => {
